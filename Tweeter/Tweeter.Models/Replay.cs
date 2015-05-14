@@ -6,6 +6,8 @@ using System.Text;
 
 namespace Tweeter.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Replay
     {
         [Key]
@@ -15,13 +17,15 @@ namespace Tweeter.Models
         public string Text { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
+
+        [ForeignKey("AuthorId")]
+        public virtual User Author { get; set; }
 
         [Required]
         public int TweetId { get; set; }
 
-        public Tweet Tweet { get; set; }
-
-        public User Author { get; set; }
+        [ForeignKey("TweetId")]
+        public virtual Tweet Tweet { get; set; }
     }
 }

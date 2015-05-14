@@ -56,8 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="ITweeterDbContext.cs" />
+    <Compile Include="TweeterDbContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="UnitOfWork\ITweeterData.cs" />
+    <Compile Include="UnitOfWork\TweeterData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tweeter.Models\Tweeter.Models.csproj">
