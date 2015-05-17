@@ -14,7 +14,8 @@
         private ICollection<Replay> replays;
         private ICollection<Report> reports;
         private ICollection<User> followers;
-        private ICollection<User> following; 
+        private ICollection<User> following;
+        private ICollection<Notification> notifications; 
 
         public User()
         {
@@ -25,6 +26,7 @@
             this.replays = new HashSet<Replay>();
             this.followers = new HashSet<User>();
             this.following = new HashSet<User>();
+            this.notifications = new HashSet<Notification>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
@@ -77,6 +79,12 @@
         {
             get { return this.following; }
             set { this.following = value; }
+        }
+
+        public virtual ICollection<Notification> Notifications
+        {
+            get { return this.notifications; }
+            set { this.notifications = value; }
         }
     }
 }

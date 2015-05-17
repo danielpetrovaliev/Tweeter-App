@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Tweeter.Web.Models;
 
 namespace Tweeter.Web.Controllers
 {
+    using ViewModels;
+
     [Authorize]
     public class ManageController : Controller
     {

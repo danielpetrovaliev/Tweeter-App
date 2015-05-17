@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public class Tweet
     {
         private ICollection<User> usersFavorites;
@@ -14,6 +14,7 @@
 
         public Tweet()
         {
+            this.CreatedOn = DateTime.Now;
             this.usersFavorites = new HashSet<User>();
             this.usersReTweets = new HashSet<User>();
             this.reports = new HashSet<Report>();
