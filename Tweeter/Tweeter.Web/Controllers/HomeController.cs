@@ -1,12 +1,9 @@
 ﻿namespace Tweeter.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Web.Mvc;
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Data.UnitOfWork;
-    using Models;
     using ViewModels;
 
     public class HomeController : BaseController
