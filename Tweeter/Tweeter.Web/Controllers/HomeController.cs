@@ -14,8 +14,8 @@
         public ActionResult Index()
         {
             var tweets = this.Data.Tweets.All().Include(t => t.Author).Project().To<TweetViewModel>();
-            Mapper.CreateMap<Tweet, TweetViewModel>();
-            var mappedTweets = Mapper.Map<IEnumerable<TweetViewModel>>(tweets);
+            //Mapper.CreateMap<Tweet, TweetViewModel>();
+            //var mappedTweets = Mapper.Map<IEnumerable<TweetViewModel>>(tweets);
 
 
             return View(tweets);
