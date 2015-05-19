@@ -2,7 +2,7 @@
 @if (this.User.Identity.IsAuthenticated)
 {
     <div class="row">
-        @using (Html.BeginForm("Create", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("Create", "Tweets", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
         {
             <div class="jumbotron">
                 <div class="row">
@@ -10,8 +10,8 @@
                         @Html.AntiForgeryToken()
                         <div class="form-group">
                             <div class="col-md-12">
-                                @Html.TextArea("text", null, new { rows = "1", placeholder = "What's happening ?", @class = "form-control" })
-                                @Html.ValidationMessage("text", new { @class = "text-danger" })
+                                @Html.TextArea("text", null, new {rows = "5", placeholder = "What's happening ?", @class = "form-control"})
+                                @Html.ValidationMessage("text", new {@class = "text-danger"})
                             </div>
                         </div>
                     </div>
@@ -23,55 +23,6 @@
             </div>
         }
     </div>
-
-    if (Model.Any())
-    {
-        foreach (var item in Model)
-        {
-            <div>
-                <div>
-                    <b class="media-heading">@item.Author.UserName</b>
-                    <i style="font-size: 8px;" class="glyphicon glyphicon-star"></i>
-                    <span>@item.CreatedOn</span>
-                </div>
-                <div>
-                    @item.Text
-                </div>
-                <hr />
-            </div>
-        }
-    }
-    else
-    {
-        <div class="alert alert-danger">
-            <h2>Nothing to show!</h2>
-        </div>
-    }
-
 }
-else
-{
-    if (Model.Any())
-    {
-        foreach (var item in Model)
-        {
-            <div>
-                <div>
-                    <b class="media-heading">@item.Author.UserName</b>
-                    <i style="font-size: 8px;" class="glyphicon glyphicon-star"></i>
-                    <span>@item.CreatedOn</span>
-                </div>
-                <div>
-                    @item.Text
-                </div>
-                <hr />
-            </div>
-        }
-    }
-    else
-    {
-        <div class="alert alert-danger">
-            <h2>Nothing to show!</h2>
-        </div>
-    }
-}
+
+@Html.Partial("_TweetsPartial", Model)

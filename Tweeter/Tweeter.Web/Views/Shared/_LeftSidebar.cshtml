@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 
-@if (this.User.Identity.IsAuthenticated)
+@if (ViewBag.UserProfile != null)
 {
     <div class="well">
         <div class="row">
@@ -13,6 +13,9 @@
             </div>
             <div>
                 Followers: <span class="badge">@ViewBag.UserProfile.Followers.Count</span>
+            </div>
+            <div>
+                Favorited: <span class="badge">@ViewBag.UserProfile.FavoritedTweets.Count</span>
             </div>
         </div>
     </div>

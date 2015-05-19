@@ -10,7 +10,7 @@
     {
         private ICollection<Tweet> tweets;
         private ICollection<Tweet> favoritedTweets;
-        private ICollection<Tweet> reTweetedTweets; 
+        private ICollection<Tweet> reTweetedTweets;
         private ICollection<Replay> replays;
         private ICollection<Report> reports;
         private ICollection<User> followers;

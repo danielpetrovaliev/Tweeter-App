@@ -1,6 +1,7 @@
 ﻿@model Tweeter.Models.User
 @{
     ViewBag.Title = "User page";
+    Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
 }
 
-
+@Html.Partial("_TweetsPartial", Model.Tweets)

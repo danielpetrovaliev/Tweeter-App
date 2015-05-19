@@ -13,7 +13,8 @@
 
         public ActionResult Notifications()
         {
-            return View();
+            var notifications = this.UserProfile.Notifications;
+            return View(notifications);
         }
 
         public UsersController(ITweeterData data) 

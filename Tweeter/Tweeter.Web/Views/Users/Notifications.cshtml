@@ -1,8 +1,22 @@
 ﻿@model ICollection<Tweeter.Models.Notification>
-
+@{
+    Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";    
+}
 @if (Model.Any())
 {
-    
+    foreach (var notification in Model)
+    {
+        <div class="well">
+            <div class="col-md-10">
+                <h3>@notification.Text</h3>
+            </div>
+            <div class="col-md-2">
+                <span>
+                    @(notification.Date < DateTime.Today ? notification.Date.ToString("hh h") : notification.Date.ToString("MMMM dd"))
+                </span>
+            </div>
+        </div>
+    }
 }
 else
 {

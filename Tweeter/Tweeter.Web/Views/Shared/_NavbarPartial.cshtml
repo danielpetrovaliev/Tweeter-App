@@ -1,0 +1,5 @@
+﻿@if (this.User.Identity.IsAuthenticated)
+{
+    <li>@Html.ActionLink("Profile", "ShowProfile", "Users")</li>
+    <li>@Html.ActionLink("Notifications", "Notifications", "Users")</li>
+}

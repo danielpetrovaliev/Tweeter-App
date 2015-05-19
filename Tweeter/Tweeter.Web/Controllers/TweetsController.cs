@@ -5,12 +5,13 @@
     using System.Net;
     using System.Web.Mvc;
     using Data;
+    using Data.UnitOfWork;
     using Microsoft.AspNet.Identity;
     using Tweeter.Models;
     using ViewModels;
 
     [Authorize]
-    public class TweetsController : Controller
+    public class TweetsController : BaseController
     {
         private TweeterDbContext db = new TweeterDbContext();
 
@@ -53,7 +54,7 @@
             if (ModelState.IsValid)
             {
                 tweet.AuthorId = this.User.Identity.GetUserId();
-                db.Tweets.Add(new Tweet(){AuthorId = tweet.AuthorId, Text = tweet.Text});
+                db.Tweets.Add(new Tweet() { AuthorId = tweet.AuthorId, Text = tweet.Text });
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
@@ -128,6 +129,11 @@
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public TweetsController(ITweeterData data)
+            : base(data)
+        {
         }
     }
 }
