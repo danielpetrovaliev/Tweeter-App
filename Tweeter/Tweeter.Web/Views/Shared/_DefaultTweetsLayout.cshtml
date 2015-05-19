@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Profile", "ShowProfile", "Users")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -30,7 +30,7 @@
     <div class="container body-content">
         <div style="margin-top: 30px;" class="row">
             <div class="col-md-2">
-
+                @Html.Partial("_LeftSidebar")
             </div>
 
             <div class="col-md-8">

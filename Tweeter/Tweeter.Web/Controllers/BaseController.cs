@@ -6,7 +6,7 @@
     using System.Web.Routing;
     using Data.UnitOfWork;
     using Microsoft.AspNet.Identity;
-    using Tweeter.Models;
+    using Models;
 
     public abstract class BaseController : Controller
     {
@@ -43,6 +43,7 @@
                 var username = requestContext.HttpContext.User.Identity.GetUserName();
                 var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
                 this.UserProfile = user;
+                this.ViewBag.UserProfile = user;
             }
             return base.BeginExecute(requestContext, callback, state);
         }

@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (this.User.Identity.IsAuthenticated)
+{
+    <div class="well">
+        <div class="row">
+            <h3>@this.User.Identity.GetUserName()</h3>
+            <div>
+                Tweets: <span class="badge">@ViewBag.UserProfile.Tweets.Count</span>
+            </div>
+            <div>
+                Following: <span class="badge">@ViewBag.UserProfile.Following.Count</span>
+            </div>
+            <div>
+                Followers: <span class="badge">@ViewBag.UserProfile.Followers.Count</span>
+            </div>
+        </div>
+    </div>
+}

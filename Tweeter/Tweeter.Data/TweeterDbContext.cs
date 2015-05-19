@@ -26,15 +26,11 @@
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>()
-                .HasMany(u => u.Tweets)
-                .WithMany()
-                .Map(x =>
-                {
-                    x.MapLeftKey("UserId");
-                    x.MapRightKey("TweetId");
-                    x.ToTable("UsersToTweets");
-                });
+                .HasMany(a => a.Tweets)
+                .WithRequired(t => t.Author)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.ReTweetedTweets)

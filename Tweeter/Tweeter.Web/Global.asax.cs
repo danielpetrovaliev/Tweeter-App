@@ -21,8 +21,8 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            var autoMapper = new AutoMapperConfig(new[] { Assembly.GetExecutingAssembly() });
-            autoMapper.Execute();
+            //var autoMapper = new AutoMapperConfig(new[] { Assembly.GetExecutingAssembly() });
+            //autoMapper.Execute();
         }
     }
 }

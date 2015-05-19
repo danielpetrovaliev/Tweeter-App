@@ -7,6 +7,7 @@
     using Data;
     using Microsoft.AspNet.Identity;
     using Tweeter.Models;
+    using ViewModels;
 
     [Authorize]
     public class TweetsController : Controller
@@ -47,14 +48,14 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AuthorId,Text,CreatedOn")] Tweet tweet)
+        public ActionResult Create(TweetViewModel tweet)
         {
             if (ModelState.IsValid)
             {
                 tweet.AuthorId = this.User.Identity.GetUserId();
-                db.Tweets.Add(tweet);
+                db.Tweets.Add(new Tweet(){AuthorId = tweet.AuthorId, Text = tweet.Text});
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);
