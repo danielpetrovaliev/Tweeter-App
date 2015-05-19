@@ -5,16 +5,25 @@
     using System.Linq;
     using System.Reflection;
     using AutoMapper;
+    using Models;
+    using ViewModels;
 
     public class AutoMapperConfig
     {
         public void Execute()
         {
-            var types = Assembly.GetExecutingAssembly().GetExportedTypes();
+            //var types = Assembly.GetExecutingAssembly().GetExportedTypes();
 
-            LoadStandardMappings(types);
+            //LoadStandardMappings(types);
 
-            LoadCustomMappings(types);
+            //LoadCustomMappings(types);
+
+            Mapper.CreateMap<Tweet, TweetViewModel>();
+            Mapper.CreateMap<User, UserViewModel>();
+            Mapper.CreateMap<Replay, ReplayViewModel>();
+            Mapper.CreateMap<Notification, NotificationViewModel>();
+            Mapper.CreateMap<Report, ReportViewModel>();
+            Mapper.AssertConfigurationIsValid();
         }
 
         private static void LoadStandardMappings(IEnumerable<Type> types)

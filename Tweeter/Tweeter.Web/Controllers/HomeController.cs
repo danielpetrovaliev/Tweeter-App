@@ -1,8 +1,10 @@
 ﻿namespace Tweeter.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Data.UnitOfWork;
     using Models;
@@ -24,9 +26,11 @@
             //}
             
             var tweets = this.Data.Tweets.All()
-                    .Include(t => t.Author).Project().To<TweetViewModel>();
+                    .Include(t => t.Author).ToList();
 
-            return View(tweets);
+            var viewTweets = Mapper.Map<List<Tweet>, List<TweetViewModel>>(tweets);
+
+            return View(viewTweets);
         }
 
         public HomeController(ITweeterData data)
