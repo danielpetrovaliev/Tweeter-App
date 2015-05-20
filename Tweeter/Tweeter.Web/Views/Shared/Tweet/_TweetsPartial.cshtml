@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Tweeter.Web.ViewModels.TweetViewModel>
+﻿@model IEnumerable<Tweeter.Web.ViewModels.Tweet.TweetViewModel>
 
 @if (Model.Any())
 {
@@ -6,7 +6,9 @@
     {
         <div>
             <div>
-                <b class="media-heading">@item.Author.UserName</b>
+                <b class="media-heading">
+                    @Html.ActionLink(item.Author.UserName, "ShowProfile", "Users", new {id = item.AuthorId}, new {})
+                </b>
                 <i style="font-size: 8px;" class="glyphicon glyphicon-star"></i>
                 <span>@item.CreatedOn</span>
             </div>

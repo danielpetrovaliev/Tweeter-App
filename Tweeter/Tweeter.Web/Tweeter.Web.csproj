@@ -251,11 +251,13 @@
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\NotificationViewModel.cs" />
-    <Compile Include="ViewModels\ReplayViewModel.cs" />
-    <Compile Include="ViewModels\ReportViewModel.cs" />
-    <Compile Include="ViewModels\TweetViewModel.cs" />
-    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\Notification\NotificationViewModel.cs" />
+    <Compile Include="ViewModels\Replay\ReplayViewModel.cs" />
+    <Compile Include="ViewModels\Report\ReportViewModel.cs" />
+    <Compile Include="ViewModels\Tweet\SimpleTweetViewModel.cs" />
+    <Compile Include="ViewModels\Tweet\TweetViewModel.cs" />
+    <Compile Include="ViewModels\User\SimpleUserViewModel.cs" />
+    <Compile Include="ViewModels\User\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -352,7 +354,8 @@
     <Content Include="Scripts\respond.min.js.map">
       <DependentUpon>respond.min.js</DependentUpon>
     </Content>
-    <Content Include="Views\Shared\_TweetsPartial.cshtml" />
+    <Content Include="Views\Shared\Tweet\_TweetsPartial.cshtml" />
+    <Content Include="Views\Shared\Tweet\_CreateTweetPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

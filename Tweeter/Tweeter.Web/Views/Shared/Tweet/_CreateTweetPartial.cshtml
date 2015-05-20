@@ -1,0 +1,24 @@
+﻿@model Tweeter.Web.ViewModels.Tweet.TweetViewModel
+
+<div class="row">
+    @using (Html.BeginForm("Create", "Tweets", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-10">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.TextArea("text", null, new { rows = "5", placeholder = "What's happening ?", @class = "form-control" })
+                            @Html.ValidationMessage("text", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-sm btn-info" type="submit">Tweet</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

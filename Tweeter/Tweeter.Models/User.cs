@@ -14,7 +14,7 @@
         private ICollection<Replay> replays;
         private ICollection<Report> reports;
         private ICollection<User> followers;
-        private ICollection<User> following;
+        private ICollection<User> _followings;
         private ICollection<Notification> notifications; 
 
         public User()
@@ -25,7 +25,7 @@
             this.reports = new HashSet<Report>();
             this.replays = new HashSet<Replay>();
             this.followers = new HashSet<User>();
-            this.following = new HashSet<User>();
+            this._followings = new HashSet<User>();
             this.notifications = new HashSet<Notification>();
         }
 
@@ -75,10 +75,10 @@
             set { this.followers = value; }
         }
 
-        public virtual ICollection<User> Following
+        public virtual ICollection<User> Followings
         {
-            get { return this.following; }
-            set { this.following = value; }
+            get { return this._followings; }
+            set { this._followings = value; }
         }
 
         public virtual ICollection<Notification> Notifications

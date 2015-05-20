@@ -63,7 +63,7 @@
                 });
 
             modelBuilder.Entity<User>()
-                .HasMany(u => u.Following)
+                .HasMany(u => u.Followings)
                 .WithMany()
                 .Map(x =>
                 {

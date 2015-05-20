@@ -9,6 +9,7 @@
     using Microsoft.AspNet.Identity;
     using Tweeter.Models;
     using ViewModels;
+    using ViewModels.Tweet;
 
     [Authorize]
     public class TweetsController : BaseController
@@ -60,7 +61,7 @@
             }
 
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);
-            return View(tweet);
+            return View("Tweet/_CreateTweetPartial", tweet);
         }
 
         // GET: Tweets/Edit/5

@@ -1,7 +1,31 @@
-﻿@model Tweeter.Models.User
+﻿@model Tweeter.Web.ViewModels.User.UserViewModel
 @{
     ViewBag.Title = "User page";
     Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
 }
 
-@Html.Partial("_TweetsPartial", Model.Tweets)
+@if (Model.Tweets.Any())
+{
+    foreach (var item in Model.Tweets)
+    {
+        <div>
+            <div>
+                <b class="media-heading">
+                    @Html.ActionLink(item.Author.UserName, "ShowProfile", "Users")
+                </b>
+                <i style="font-size: 8px;" class="glyphicon glyphicon-star"></i>
+                <span>@item.CreatedOn</span>
+            </div>
+            <div>
+                @item.Text
+            </div>
+            <hr />
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-danger">
+        <h2>Nothing to show!</h2>
+    </div>
+}
