@@ -3,5 +3,25 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
 }
+@if (TempData["message"] != null)
+{
+    if (((bool)TempData["isMessageSuccess"]) == true)
+    {
+        <div class="alert alert-success">
+            @TempData["message"]
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            @TempData["message"]
+        </div>
+    }
+}
 
-@Html.Partial("_HomePagePartial", Model)
+@if (this.User.Identity.IsAuthenticated)
+{
+    Html.RenderPartial("Tweet/_CreateTweetPartial");
+}
+
+@Html.DisplayFor(tweets => tweets)

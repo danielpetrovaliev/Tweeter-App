@@ -1,9 +1,10 @@
 ﻿namespace Tweeter.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Data.UnitOfWork;
-    using Models;
+    using ViewModels.Notification;
     using ViewModels.User;
 
     [Authorize]
@@ -11,28 +12,48 @@
     {
         public ActionResult ShowProfile(string id)
         {
+            var user = this.Data
+                .Users
+                .All()
+                .Project()
+                .To<UserViewModel>()
+                .FirstOrDefault(u => u.Id == this.UserProfile.Id);
+
             if (id != null)
             {
-                var user = this.Data.Users.Find(id);
+                user = this.Data
+                    .Users
+                    .All()
+                    .Project()
+                    .To<UserViewModel>()
+                    .FirstOrDefault(u => u.Id == this.UserProfile.Id);
 
                 if (user == null)
                 {
                     return this.HttpNotFound();
                 }
 
-                return View(Mapper.Map<User, UserViewModel>(user));
+                return View(user);
             }
 
-            return View(Mapper.Map<User, UserViewModel>(this.UserProfile));
+            return View(user);
         }
 
         public ActionResult Notifications()
         {
-            var notifications = this.UserProfile.Notifications;
+            var notifications = this.Data
+                .Notifications
+                .All()
+                .Where(n => n.UserId == this.UserProfile.Id)
+                .OrderBy(n => n.IsChecked)
+                .ThenByDescending(n => n.Date)
+                .Project()
+                .To<NotificationViewModel>();
+
             return View(notifications);
         }
 
-        public UsersController(ITweeterData data) 
+        public UsersController(ITweeterData data)
             : base(data)
         {
         }

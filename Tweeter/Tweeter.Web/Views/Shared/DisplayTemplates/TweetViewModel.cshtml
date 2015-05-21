@@ -1,0 +1,15 @@
+﻿@model Tweeter.Web.ViewModels.Tweet.SimpleTweetViewModel
+
+<div>
+    <div>
+        <b class="media-heading">
+            @Html.ActionLink(Model.Author.UserName, "ShowProfile", "Users", new { id = Model.AuthorId }, new { })
+        </b>
+        <i style="font-size: 8px;" class="glyphicon glyphicon-star"></i>
+        <span>@Model.CreatedOn</span>
+    </div>
+    <div>
+        @Model.Text
+    </div>
+    <hr />
+</div>

@@ -1,0 +1,11 @@
+﻿@model Tweeter.Web.ViewModels.Notification.NotificationViewModel
+<div class="well">
+    <div class="col-md-10">
+        <h3>@Model.Text</h3>
+    </div>
+    <div class="col-md-2">
+        <span>
+            @(Model.Date < DateTime.Today ? Model.Date.ToString("hh h") : Model.Date.ToString("MMMM dd"))
+        </span>
+    </div>
+</div>

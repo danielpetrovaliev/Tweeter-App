@@ -6,22 +6,7 @@
 
 @if (Model.Tweets.Any())
 {
-    foreach (var item in Model.Tweets)
-    {
-        <div>
-            <div>
-                <b class="media-heading">
-                    @Html.ActionLink(item.Author.UserName, "ShowProfile", "Users")
-                </b>
-                <i style="font-size: 8px;" class="glyphicon glyphicon-star"></i>
-                <span>@item.CreatedOn</span>
-            </div>
-            <div>
-                @item.Text
-            </div>
-            <hr />
-        </div>
-    }
+    @Html.DisplayFor(u => u.Tweets);
 }
 else
 {

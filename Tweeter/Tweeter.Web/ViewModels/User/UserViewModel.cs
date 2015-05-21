@@ -8,11 +8,11 @@
 
     public class UserViewModel : SimpleUserViewModel
     {
-        public virtual ICollection<SimpleTweetViewModel> Tweets { get; set; }
+        public virtual ICollection<TweetViewModel> Tweets { get; set; }
 
-        public virtual ICollection<SimpleTweetViewModel> FavoritedTweets { get; set; }
+        public virtual ICollection<TweetViewModel> FavoritedTweets { get; set; }
 
-        public virtual ICollection<SimpleTweetViewModel> ReTweetedTweets { get; set; }
+        public virtual ICollection<TweetViewModel> ReTweetedTweets { get; set; }
 
         public virtual ICollection<ReplayViewModel> Replays { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿namespace Tweeter.Web.ViewModels.Notification
 {
+    using System;
     using Infrastructure.Mapping;
     using Models;
     using User;
@@ -9,6 +10,8 @@
         public int Id { get; set; }
 
         public string Text { get; set; }
+
+        public DateTime Date { get; set; }
 
         public bool IsChecked { get; set; }
 

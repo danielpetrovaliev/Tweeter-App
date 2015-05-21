@@ -1,7 +1,0 @@
-﻿@model IEnumerable<Tweeter.Web.ViewModels.Tweet.TweetViewModel>
-@if (this.User.Identity.IsAuthenticated)
-{
-    Html.Partial("Tweet/_CreateTweetPartial");
-}
-
-@Html.Partial("Tweet/_TweetsPartial", Model)

@@ -52,15 +52,22 @@
         [ValidateAntiForgeryToken]
         public ActionResult Create(TweetViewModel tweet)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 tweet.AuthorId = this.User.Identity.GetUserId();
                 db.Tweets.Add(new Tweet() { AuthorId = tweet.AuthorId, Text = tweet.Text });
                 db.SaveChanges();
+
+                this.TempData["message"] = "Tweet added successfylly.";
+                this.TempData["isMessageSuccess"] = true;
+
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);
+            this.TempData["message"] = "There are problem with tweet adding.";
+            this.TempData["isMessageSuccess"] = false;
+
+            this.ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);
             return View("Tweet/_CreateTweetPartial", tweet);
         }
 

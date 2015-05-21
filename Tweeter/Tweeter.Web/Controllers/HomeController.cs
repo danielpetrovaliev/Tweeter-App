@@ -16,13 +16,19 @@
                 var tweetsOfFlowers = this.UserProfile
                     .Followings
                     .SelectMany(u => u.Tweets)
+                    .OrderByDescending(t => t.CreatedOn)
                     .AsQueryable().Project().To<TweetViewModel>();
 
                 return View(tweetsOfFlowers);
             }
 
-            var tweets = this.Data.Tweets.All()
-                    .Include(t => t.Author).Project().To<TweetViewModel>();
+            var tweets = this.Data
+                .Tweets
+                .All()
+                .Include(t => t.Author)
+                .OrderByDescending(t => t.CreatedOn)
+                .Project()
+                .To<TweetViewModel>();
 
             return View(tweets);
         }
