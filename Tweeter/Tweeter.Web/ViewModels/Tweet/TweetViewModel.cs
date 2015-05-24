@@ -14,7 +14,5 @@
         public virtual ICollection<SimpleUserViewModel> UsersReTweets { get; set; }
 
         public virtual ICollection<ReportViewModel> Reports { get; set; }
-
-        public SimpleTweetViewModel CreateModel { get; set; }
     }
 }

@@ -4,14 +4,17 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+    using AutoMapper.QueryableExtensions;
     using Data;
     using Data.UnitOfWork;
+    using Hubs;
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.SignalR;
     using Tweeter.Models;
     using ViewModels;
     using ViewModels.Tweet;
 
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     public class TweetsController : BaseController
     {
         private TweeterDbContext db = new TweeterDbContext();
@@ -24,17 +27,48 @@
         }
 
         // GET: Tweets/Details/5
+        public ActionResult GetPartialTweet(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var tweet = this.Data
+                .Tweets
+                .All()
+                .Project()
+                .To<TweetViewModel>()
+                .FirstOrDefault(t => t.Id == id);
+
+            if (tweet == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(tweet);
+        }
+
+        // GET: Tweets/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tweet tweet = db.Tweets.Find(id);
+
+            var tweet = this.Data
+                .Tweets
+                .All()
+                .Project()
+                .To<TweetViewModel>()
+                .FirstOrDefault(t => t.Id == id);
+
             if (tweet == null)
             {
                 return HttpNotFound();
             }
+
             return View(tweet);
         }
 
@@ -55,10 +89,20 @@
             if (this.ModelState.IsValid)
             {
                 tweet.AuthorId = this.User.Identity.GetUserId();
-                db.Tweets.Add(new Tweet() { AuthorId = tweet.AuthorId, Text = tweet.Text });
+
+                var newTweet = new Tweet() {AuthorId = tweet.AuthorId, Text = tweet.Text};
+                db.Tweets.Add(newTweet);
                 db.SaveChanges();
 
-                this.TempData["message"] = "Tweet added successfylly.";
+                
+                // Show Tweet to all followers
+
+                var context = GlobalHost.ConnectionManager.GetHubContext<TweeterHub>();
+                var followrsNames = this.UserProfile.Followers.Select(f => f.UserName).ToList();
+                context.Clients.Users(followrsNames).All.showTweet(newTweet.Id);
+                context.Clients.All.showTweet(newTweet.Id);
+
+                this.TempData["message"] = "Tweet added successfully.";
                 this.TempData["isMessageSuccess"] = true;
 
                 return RedirectToAction("Index", "Home");
@@ -98,6 +142,7 @@
             {
                 db.Entry(tweet).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);

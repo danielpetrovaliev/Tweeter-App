@@ -24,4 +24,26 @@
     Html.RenderPartial("Tweet/_CreateTweetPartial");
 }
 
-@Html.DisplayFor(tweets => tweets)
+<div class="tweets">
+    @Html.DisplayFor(tweets => tweets)
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $.connection.hub.start();
+            var tweeter = $.connection.tweeterHub;
+
+            // Register client functions called from server
+            tweeter.client.showTweet = showTweet;
+
+
+            function showTweet(tweetId) {
+                console.log(tweetId);
+                var tweetPartial = $('<div>').load('/Tweets/GetPartialTweet/' + tweetId);
+                console.log(tweetPartial);
+                $('.tweets').append(tweetPartial);
+            }
+        })
+    </script>
+}
