@@ -1,6 +1,7 @@
 ﻿namespace Tweeter.Web.Controllers
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -41,7 +42,18 @@
             if (requestContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 var username = requestContext.HttpContext.User.Identity.GetUserName();
-                var user = this.Data.Users.All().FirstOrDefault(u => u.UserName == username);
+                var user = this.Data
+                    .Users
+                    .All()
+                    .Include(u => u.FavoritedTweets)
+                    .Include(u => u.Followers)
+                    .Include(u => u.Followings)
+                    .Include(u => u.Notifications)
+                    .Include(u => u.ReTweetedTweets)
+                    .Include(u => u.Replays)
+                    .Include(u => u.Reports)
+                    .Include(u => u.Tweets)
+                    .FirstOrDefault(u => u.UserName == username);
                 this.UserProfile = user;
                 this.ViewBag.UserProfile = user;
             }

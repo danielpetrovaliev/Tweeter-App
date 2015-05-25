@@ -1,4 +1,4 @@
-﻿@model Tweeter.Web.ViewModels.Tweet.SimpleTweetViewModel
+﻿@model Tweeter.Web.ViewModels.Tweet.TweetViewModel
 
 <div>
     <div>
@@ -11,5 +11,25 @@
     <div>
         @Model.Text
     </div>
-    <hr />
+    <div>
+        <div style="margin-top: 15px;" class="row">
+            <div class="col-md-2">
+                <i id="" class="glyphicon glyphicon-refresh"></i>
+                @Model.UsersFavorites.Count
+            </div>
+            <div class="col-md-2">
+                <i class="glyphicon glyphicon-star"></i>
+                @Model.UsersFavorites.Count
+            </div>
+            <div class="col-md-2">
+                <i class="glyphicon glyphicon-warning-sign"></i>
+                @Model.Reports.Count
+            </div>
+            <div class="col-md-2">
+
+            </div>    
+        </div>
+        <hr style="margin-top: 5px;"/>
+          
+    </div>
 </div>

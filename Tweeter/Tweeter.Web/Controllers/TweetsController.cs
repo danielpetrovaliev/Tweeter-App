@@ -10,8 +10,7 @@
     using Hubs;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.SignalR;
-    using Tweeter.Models;
-    using ViewModels;
+    using Models;
     using ViewModels.Tweet;
 
     [System.Web.Mvc.Authorize]
@@ -47,6 +46,23 @@
             }
 
             return View(tweet);
+        }
+
+        [HttpPost]
+        public ActionResult FavoriteTweet(int id)
+        {
+            var tweet = this.Data.Tweets.All().FirstOrDefault(t => t.Id == id);
+            tweet.UsersFavorites.Add(this.UserProfile);
+            this.Data.SaveChanges();
+
+            tweet.Author.Notifications.Add(new Notification()
+            {
+                Text = this.UserProfile.UserName + " likes you tweet - " + tweet.Id
+            });
+
+            this.Data.SaveChanges();
+
+            return this.Json(new {viewsCount = tweet.UsersFavorites.Count});
         }
 
         // GET: Tweets/Details/5
@@ -93,14 +109,12 @@
                 var newTweet = new Tweet() {AuthorId = tweet.AuthorId, Text = tweet.Text};
                 db.Tweets.Add(newTweet);
                 db.SaveChanges();
-
                 
                 // Show Tweet to all followers
 
                 var context = GlobalHost.ConnectionManager.GetHubContext<TweeterHub>();
-                var followrsNames = this.UserProfile.Followers.Select(f => f.UserName).ToList();
-                context.Clients.Users(followrsNames).All.showTweet(newTweet.Id);
-                context.Clients.All.showTweet(newTweet.Id);
+                var usernames = this.UserProfile.Followers.Select(f => f.UserName).ToList();
+                context.Clients.Users(usernames).showTweet(newTweet.Id);
 
                 this.TempData["message"] = "Tweet added successfully.";
                 this.TempData["isMessageSuccess"] = true;

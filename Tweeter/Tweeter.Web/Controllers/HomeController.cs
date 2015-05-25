@@ -17,7 +17,14 @@
                     .Followings
                     .SelectMany(u => u.Tweets)
                     .OrderByDescending(t => t.CreatedOn)
-                    .AsQueryable().Project().To<TweetViewModel>();
+                    .AsQueryable()
+                    .Include(t => t.UsersFavorites)
+                    .Include(t => t.Author)
+                    .Include(t => t.Replays)
+                    .Include(t => t.Reports)
+                    .Include(t => t.UsersReTweets)
+                    .Project()
+                    .To<TweetViewModel>();
 
                 return View(tweetsOfFlowers);
             }
@@ -25,7 +32,11 @@
             var tweets = this.Data
                 .Tweets
                 .All()
+                .Include(t => t.UsersFavorites)
                 .Include(t => t.Author)
+                .Include(t => t.Replays)
+                .Include(t => t.Reports)
+                .Include(t => t.UsersReTweets)
                 .OrderByDescending(t => t.CreatedOn)
                 .Project()
                 .To<TweetViewModel>();

@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 
 namespace Tweeter.Web.Controllers
 {
+    using System.Web.Security;
     using Tweeter.Models;
     using ViewModels;
 
@@ -81,6 +82,7 @@ namespace Tweeter.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    FormsAuthentication.SetAuthCookie(model.Username, true);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -394,6 +396,7 @@ namespace Tweeter.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 

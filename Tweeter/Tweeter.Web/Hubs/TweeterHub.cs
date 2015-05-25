@@ -1,34 +1,33 @@
 ﻿namespace Tweeter.Web.Hubs
 {
-    using System.Data.Entity;
-    using System.Linq;
-    using AutoMapper.QueryableExtensions;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Data;
     using Data.UnitOfWork;
     using Microsoft.AspNet.SignalR;
-    using ViewModels.Tweet;
+    using Microsoft.AspNet.SignalR.Hubs;
+    using Models;
 
+    [Authorize]
+    [HubName("tweeterHub")]
     public class TweeterHub : Hub
     {
+        private Dictionary<string, string> connectedUsers = new Dictionary<string, string>();
+
         public static ITweeterData Data
         {
             get { return new TweeterData(new TweeterDbContext()); }
         }
 
-        public void JoinRoom(string room)
+        /*public override Task OnConnected()
         {
-            Groups.Add(Context.ConnectionId, room);
-            Clients.Caller.joinRoom(room);
-        }
+            string userName = Context.User.Identity.Name;
+            string connectionId = Context.ConnectionId;
 
-        public void SendMessageToRoom(string message, string[] rooms)
-        {
-            var msg = string.Format("{0}: {1}", Context.ConnectionId, message);
+            connectedUsers.Add(userName, connectionId);
 
-            for (int i = 0; i < rooms.Length; i++)
-            {
-                Clients.Group(rooms[i]).addMessage(msg);
-            }
-        }
+            return base.OnConnected();
+        }*/
+
     }
 }
