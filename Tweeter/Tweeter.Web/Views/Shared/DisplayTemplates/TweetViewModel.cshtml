@@ -1,4 +1,5 @@
-﻿@model Tweeter.Web.ViewModels.Tweet.TweetViewModel
+﻿@using Tweeter.Web.Extensions
+@model Tweeter.Web.ViewModels.Tweet.TweetViewModel
 
 <div>
     <div>
@@ -12,24 +13,49 @@
         @Model.Text
     </div>
     <div>
-        <div style="margin-top: 15px;" class="row">
-            <div class="col-md-2">
-                <i id="" class="glyphicon glyphicon-refresh"></i>
-                @Model.UsersFavorites.Count
-            </div>
-            <div class="col-md-2">
-                <i class="glyphicon glyphicon-star"></i>
-                @Model.UsersFavorites.Count
-            </div>
-            <div class="col-md-2">
-                <i class="glyphicon glyphicon-warning-sign"></i>
-                @Model.Reports.Count
-            </div>
-            <div class="col-md-2">
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <div style="margin-top: 15px;" class="row">
+                <div class="col-md-2">
+                    <i class="glyphicon glyphicon-refresh"></i>
+                    @Model.UsersReTweets.Count()
+                </div>
+                <div class="col-md-2">
 
-            </div>    
-        </div>
-        <hr style="margin-top: 5px;"/>
-          
+                    @Ajax.RawAjaxActionLink(String.Format("<i class='glyphicon glyphicon-star'></i>"), 
+                        "FavoriteTweet", 
+                        "Tweets", 
+                        new { id = Model.Id },
+                        new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "tweet-favorites-" + Model.Id,
+                            InsertionMode = InsertionMode.Replace
+                        }, null)
+
+                    <span id="tweet-favorites-@Model.Id">@Model.UsersFavorites.Count()</span>
+                </div>
+                <div class="col-md-2">
+
+                    @Ajax.RawAjaxActionLink(String.Format("<i class='glyphicon glyphicon-warning-sign'></i>"), 
+                        "ReportTweet", 
+                        "Tweets", 
+                        new { id = Model.Id },
+                        new AjaxOptions() 
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "tweet-reports-" + Model.Id,
+                            InsertionMode = InsertionMode.Replace
+                        }, null)
+
+                    <span id="tweet-reports-@Model.Id">@Model.Reports.Count()</span>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+        }
+
+        <hr style="margin-top: 5px;" />
     </div>
 </div>

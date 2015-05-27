@@ -51,7 +51,14 @@
         [HttpPost]
         public ActionResult FavoriteTweet(int id)
         {
-            var tweet = this.Data.Tweets.All().FirstOrDefault(t => t.Id == id);
+            var tweet = this.Data
+                .Tweets
+                .All()
+                .Include(t => t.Author)
+                .Include(t => t.UsersFavorites)
+                .Include(t => t.Author.Notifications)
+                .FirstOrDefault(t => t.Id == id);
+
             tweet.UsersFavorites.Add(this.UserProfile);
             this.Data.SaveChanges();
 
@@ -59,10 +66,49 @@
             {
                 Text = this.UserProfile.UserName + " likes you tweet - " + tweet.Id
             });
-
             this.Data.SaveChanges();
 
-            return this.Json(new {viewsCount = tweet.UsersFavorites.Count});
+            IncreaseNotifications(tweet.Author);
+
+            return this.Content(tweet.UsersFavorites.Count + "");
+        }
+
+        [HttpPost]
+        public ActionResult ReportTweet(int id)
+        {
+            var tweet = this.Data
+                .Tweets
+                .All()
+                .Include(t => t.Author)
+                .Include(t => t.Author.Notifications)
+                .FirstOrDefault(t => t.Id == id);
+            
+            var report = new Report()
+            {
+                Text = "New Report - TODO: add form for Report !",
+                TweetId = id,
+                UserId = this.UserProfile.Id
+            };
+            tweet.Reports.Add(report);
+            this.Data.SaveChanges();
+
+            tweet.Author.Notifications.Add(new Notification()
+            {
+                Text = this.UserProfile.UserName + " added report with text - " + report.Text
+            });
+            this.Data.SaveChanges();
+
+            IncreaseNotifications(tweet.Author);
+
+            return this.Content(tweet.Reports.Count + "");
+        }
+
+        [NonAction]
+        private void IncreaseNotifications(User author)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<TweeterHub>();
+            var notificationsCount = author.Notifications.Count(n => n.IsChecked == false);
+            context.Clients.User(author.UserName).increaseNotifications(notificationsCount);
         }
 
         // GET: Tweets/Details/5
@@ -111,10 +157,10 @@
                 db.SaveChanges();
                 
                 // Show Tweet to all followers
-
                 var context = GlobalHost.ConnectionManager.GetHubContext<TweeterHub>();
                 var usernames = this.UserProfile.Followers.Select(f => f.UserName).ToList();
                 context.Clients.Users(usernames).showTweet(newTweet.Id);
+
 
                 this.TempData["message"] = "Tweet added successfully.";
                 this.TempData["isMessageSuccess"] = true;

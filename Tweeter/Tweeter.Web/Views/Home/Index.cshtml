@@ -1,4 +1,7 @@
-﻿@model System.Collections.Generic.IEnumerable<Tweeter.Web.ViewModels.Tweet.TweetViewModel>
+﻿@model PagedList.IPagedList<Tweeter.Web.ViewModels.Tweet.TweetViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
@@ -28,11 +31,15 @@
     @Html.DisplayFor(tweets => tweets)
 </div>
 
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
 @section Scripts{
     <script>
         $(function () {
             $.connection.hub.start().done(function() {
-                console.log("Connection is ready.");
+                console.log("Tweets Connection is ready.");
             });
 
             var tweeter = $.connection.tweeterHub;
@@ -41,9 +48,7 @@
             tweeter.client.showTweet = showTweet;
 
             function showTweet(tweetId) {
-                console.log(tweetId);
                 var tweetPartial = $('<div>').load('/Tweets/GetPartialTweet/' + tweetId);
-                console.log(tweetPartial);
                 $('.tweets').prepend(tweetPartial);
             }
         })

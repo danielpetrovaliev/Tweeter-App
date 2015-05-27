@@ -1,12 +1,32 @@
 ﻿@using System
 @model Tweeter.Web.ViewModels.Notification.NotificationViewModel
-<div class="well">
-    <div class="col-md-10">
-        <h3>@Model.Text</h3>
+@if (Model.IsChecked)
+{
+    <div class="well">
+        <div class="row">
+            <div class="col-md-10">
+                <h3>@Model.Text</h3>
+            </div>
+            <div class="col-md-2">
+                <span>
+                    @(Model.Date < DateTime.Today ? Model.Date.ToString("hh h") : Model.Date.ToString("MMMM dd"))
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="col-md-2">
-        <span>
-            @(Model.Date < DateTime.Today ? Model.Date.ToString("hh h") : Model.Date.ToString("MMMM dd"))
-        </span>
+}
+else
+{
+    <div class="alert alert-warning">
+        <div class="row">
+            <div class="col-md-10">
+                <h3>@Model.Text</h3>
+            </div>
+            <div class="col-md-2">
+                <span>
+                    @(Model.Date < DateTime.Today ? Model.Date.ToString("hh h") : Model.Date.ToString("MMMM dd"))
+                </span>
+            </div>
+        </div>
     </div>
-</div>
+}

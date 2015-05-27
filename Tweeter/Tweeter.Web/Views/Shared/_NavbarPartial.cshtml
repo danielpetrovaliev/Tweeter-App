@@ -1,5 +1,26 @@
-﻿@if (this.User.Identity.IsAuthenticated)
+﻿@using Tweeter.Web.Extensions
+@if (this.User.Identity.IsAuthenticated)
 {
     <li>@Html.ActionLink("Profile", "ShowProfile", "Users")</li>
-    <li>@Html.ActionLink("Notifications", "Notifications", "Users")</li>
+    <li>@Html.RawActionLink(String.Format("Notifications <span id='notifications-count' class='badge'></span>"), "Notifications", "Users")</li>
 }
+
+<script>
+    $(function () {
+        $.connection.hub.start().done(function () {
+            console.log("Notifications Connection is ready.");
+        });
+
+        var tweeter = $.connection.tweeterHub;
+
+        // Register client functions called from server
+        tweeter.client.increaseNotifications = increaseNotifications;
+
+        function increaseNotifications(notificationsCount) {
+            $('#notifications-count').text(notificationsCount);
+        }
+
+        $('#notifications-count').load('/Users/GetNotificationsCount');
+    })
+</script>
+

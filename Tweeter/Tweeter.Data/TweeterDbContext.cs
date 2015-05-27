@@ -34,7 +34,7 @@
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.ReTweetedTweets)
-                .WithMany()
+                .WithMany(u => u.UsersReTweets)
                 .Map(x =>
                 {
                     x.MapLeftKey("UserId");
@@ -44,7 +44,7 @@
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.FavoritedTweets)
-                .WithMany()
+                .WithMany(u => u.UsersFavorites)
                 .Map(x =>
                 {
                     x.MapLeftKey("UserId");
