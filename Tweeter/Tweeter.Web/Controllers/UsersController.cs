@@ -17,6 +17,13 @@
             var user = this.Data
                 .Users
                 .All()
+                .Include(u => u.Followings)
+                .Include(u => u.Tweets)
+                .Include("Tweets")
+                .Include("Tweets.Replays")
+                .Include("Tweets.UsersFavorites")
+                .Include("Tweets.UsersReTweets")
+                .Include("Tweets.Reports")
                 .Project()
                 .To<UserViewModel>()
                 .FirstOrDefault(u => u.Id == this.UserProfile.Id);
@@ -26,9 +33,16 @@
                 user = this.Data
                     .Users
                     .All()
+                    .Include(u => u.Followings)
+                    .Include(u => u.Tweets)
+                    .Include("Tweets")
+                    .Include("Tweets.Replays")
+                    .Include("Tweets.UsersFavorites")
+                    .Include("Tweets.UsersReTweets")
+                    .Include("Tweets.Reports")
                     .Project()
                     .To<UserViewModel>()
-                    .FirstOrDefault(u => u.Id == this.UserProfile.Id);
+                    .FirstOrDefault(u => u.Id == id);
 
                 if (user == null)
                 {

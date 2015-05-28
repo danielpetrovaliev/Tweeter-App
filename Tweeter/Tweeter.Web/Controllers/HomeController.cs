@@ -16,16 +16,22 @@
 
             if (this.User.Identity.IsAuthenticated)
             {
-                tweets = this.Data
-                    .Tweets
+                var currUser = this.Data
+                    .Users
                     .All()
-                    .Where(t => t.AuthorId == this.UserProfile.Id)
-                    .Include(t => t.UsersFavorites)
-                    .Include(t => t.Author)
-                    .Include(t => t.Replays)
-                    .Include(t => t.Reports)
-                    .Include(t => t.UsersReTweets)
+                    .Include(u => u.Followings)
+                    .Include("Followings.Tweets")
+                    .Include("Followings.Tweets.Replays")
+                    .Include("Followings.Tweets.UsersFavorites")
+                    .Include("Followings.Tweets.UsersReTweets")
+                    .Include("Followings.Tweets.Reports")
+                    .FirstOrDefault(u => u.Id == this.UserProfile.Id);
+
+                tweets = currUser
+                    .Followings
+                    .SelectMany(f => f.Tweets)
                     .OrderByDescending(t => t.CreatedOn)
+                    .AsQueryable()
                     .Project()
                     .To<TweetViewModel>();
             }
@@ -34,11 +40,7 @@
                 tweets = this.Data
                 .Tweets
                 .All()
-                .Include(t => t.UsersFavorites)
                 .Include(t => t.Author)
-                .Include(t => t.Replays)
-                .Include(t => t.Reports)
-                .Include(t => t.UsersReTweets)
                 .OrderByDescending(t => t.CreatedOn)
                 .Project()
                 .To<TweetViewModel>();
