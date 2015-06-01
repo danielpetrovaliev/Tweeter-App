@@ -8,11 +8,11 @@
     @Styles.Render("~/Content/infragistics")
 
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/infragistics")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/infragistics")
 
-    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
@@ -52,7 +52,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
