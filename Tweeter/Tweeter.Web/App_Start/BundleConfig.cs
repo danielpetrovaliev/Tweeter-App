@@ -12,6 +12,12 @@ namespace Tweeter.Web
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/infragistics").Include(
+                        "~/Scripts/infragistics.core.js",
+                        "~/Scripts/infragistics.dv.js",
+                        "~/Scripts/infragistics.lob.js",
+                        "~/Scripts/infragistics.loader.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -28,6 +34,10 @@ namespace Tweeter.Web
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/infragistics").Include(
+                      "~/Content/infragistics.css",
+                      "~/Content/infragistics.theme.css"));
         }
     }
 }

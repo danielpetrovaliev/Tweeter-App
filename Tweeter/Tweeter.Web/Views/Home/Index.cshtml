@@ -1,11 +1,10 @@
 ﻿@model PagedList.IPagedList<Tweeter.Web.ViewModels.Tweet.TweetViewModel>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
 }
+
 @if (TempData["message"] != null)
 {
     if (((bool)TempData["isMessageSuccess"]) == true)
