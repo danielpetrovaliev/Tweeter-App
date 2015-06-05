@@ -1,25 +1,25 @@
 ﻿@using Kendo.Mvc.UI
-@using Tweeter.Web.InputModels
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
-@(Html.Kendo().Grid<UserInputModel>()
+<h2>Tweets Admin Panel</h2>
+@(Html.Kendo().Grid<Tweeter.Web.InputModels.TweetInputModel>()
     .Name("grid")
     .Columns(columns =>
     {
-        columns.Bound(p => p.Id).Width(180);
-        columns.Bound(p => p.UserName).Width(100);
-        columns.Bound(p => p.PasswordHash).Width(100);
-        columns.Bound(p => p.Email).Width(100);
-        columns.Bound(p => p.FullName).Width(100);
-        columns.Bound(p => p.IsAdmin).Width(50);
-        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(130);
+        columns.Bound(t => t.Id).Width(30).Title("Id");
+        columns.Bound(t => t.AuthorId);
+        columns.Bound(t => t.CreatedOn).Width(150);
+        columns.Bound(t => t.Text);
+        columns.Command(command =>
+        {
+            command.Edit();
+            command.Destroy();
+        }).Width(180);
     })
     .ToolBar(toolbar => toolbar.Create())
     .Editable(editable => editable.Mode(GridEditMode.InLine))
     .Pageable()
-    .Sortable()
     .Scrollable()
     .HtmlAttributes(new { style = "height:430px;" })
     .DataSource(dataSource => dataSource
@@ -27,15 +27,14 @@
         .PageSize(20)
         .Events(events => events.Error("error_handler"))
         .Model(model =>
-            {
-                model.Id(u => u.Id);
-                model.Field(u => u.Id).Editable(false);
-            }
-        )
-        .Create(update => update.Action("EditingInline_Create", "Users"))
-        .Read(read => read.Action("EditingInline_Read", "Users"))
-        .Update(update => update.Action("EditingInline_Update", "Users"))
-        .Destroy(update => update.Action("EditingInline_Destroy", "Users"))
+        {
+            model.Id(t => t.Id);
+            model.Field(t => t.Id).Editable(false);
+        })
+        .Create(update => update.Action("EditingInline_Create", "Tweets"))
+        .Read(read => read.Action("EditingInline_Read", "Tweets"))
+        .Update(update => update.Action("EditingInline_Update", "Tweets"))
+        .Destroy(update => update.Action("EditingInline_Destroy", "Tweets"))
     )
 )
 <script type="text/javascript">

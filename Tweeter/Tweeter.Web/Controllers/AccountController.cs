@@ -393,7 +393,7 @@
         {
             AuthenticationManager.SignOut();
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new {area = ""});
         }
 
         //

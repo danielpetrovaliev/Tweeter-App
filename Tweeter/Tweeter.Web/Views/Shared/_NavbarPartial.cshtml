@@ -1,10 +1,15 @@
 ﻿@using Tweeter.Web.Extensions
+
 @if (this.User.Identity.IsAuthenticated)
 {
     <li>@Html.ActionLink("Profile", "ShowProfile", "Users")</li>
     <li>@Html.RawActionLink(String.Format("Notifications <span id='notifications-count' class='badge'></span>"), "Notifications", "Users")</li>
 }
 
+@if (this.User.IsInRole("Administrator"))
+{
+    <li>@Html.ActionLink("Go to Admin panel", "Index", "Home", new { area = "Admin" }, new { style = "background-color: brown;" })</li>
+}
 <script>
     $(function () {
         $.connection.hub.start().done(function () {

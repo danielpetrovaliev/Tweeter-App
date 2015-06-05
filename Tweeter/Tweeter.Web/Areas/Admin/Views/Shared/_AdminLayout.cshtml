@@ -18,7 +18,7 @@
     <script src="~/signalr/hubs"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: brown;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,11 +26,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Trigger", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Trigger", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @Html.Partial("_NavbarPartial")
+                    <li>@Html.ActionLink("To normal version", "Index", "Home", new { area = "" }, new { style = "color: chartreuse; font-size: 18px;" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,13 +38,7 @@
     </div>
     <div class="container body-content">
         <div style="margin-top: 30px;" class="row">
-            <div class="col-md-3">
-                @Html.Partial("_LeftSidebar")
-            </div>
-
-            <div class="col-md-9">
-                @RenderBody()
-            </div>
+            @RenderBody()
         </div>
 
         <hr />

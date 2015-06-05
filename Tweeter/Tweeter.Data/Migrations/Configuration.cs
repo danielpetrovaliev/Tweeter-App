@@ -23,6 +23,55 @@ namespace Tweeter.Data.Migrations
             {
                 AddUsers(context);
             }
+
+            if (!context.Users.Any(u => u.UserName == "admin"))
+            {
+                AddAdministratorRoleWithUser(context);
+            }
+        }
+
+        private void AddAdministratorRoleWithUser(TweeterDbContext context)
+        {
+            var admin = new User()
+            {
+                Email = "admin@admin.com",
+                FullName = "Admin Adminov",
+                UserName = "admin"
+            };
+
+            var userStore = new UserStore<User>(context);
+            var userManager = new UserManager<User>(userStore);
+            userManager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 2,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
+            };
+
+            var password = admin.UserName;
+            var userCreateResult = userManager.Create(admin, password);
+            if (!userCreateResult.Succeeded)
+            {
+                throw new Exception(string.Join("; ", userCreateResult.Errors));
+            }
+            context.SaveChanges();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var roleCreateResult = roleManager.Create(new IdentityRole("Administrator"));
+            if (!roleCreateResult.Succeeded)
+            {
+                throw new Exception(string.Join("; ", roleCreateResult.Errors));
+            }
+
+            // Add "admin" user to "Administrator" role
+            var adminUser = context.Users.First(user => user.UserName == "admin");
+            var addAdminRoleResult = userManager.AddToRole(adminUser.Id, "Administrator");
+            if (!addAdminRoleResult.Succeeded)
+            {
+                throw new Exception(string.Join("; ", addAdminRoleResult.Errors));
+            }
         }
 
         private static void AddUsers(TweeterDbContext context)

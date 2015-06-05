@@ -7,12 +7,12 @@
 
     public class TweetViewModel : SimpleTweetViewModel
     {
-        public virtual ICollection<ReplayViewModel> Replays { get; set; }
+        public ICollection<ReplayViewModel> Replays { get; set; }
          
-        public virtual ICollection<SimpleUserViewModel> UsersFavorites { get; set; }
+        public ICollection<SimpleUserViewModel> UsersFavorites { get; set; }
 
-        public virtual ICollection<SimpleUserViewModel> UsersReTweets { get; set; }
+        public ICollection<SimpleUserViewModel> UsersReTweets { get; set; }
 
-        public virtual ICollection<ReportViewModel> Reports { get; set; }
+        public ICollection<ReportViewModel> Reports { get; set; }
     }
 }

@@ -15,7 +15,7 @@
 
         public string AuthorId { get; set; }
 
-        public virtual SimpleUserViewModel Author { get; set; }
+        public SimpleUserViewModel Author { get; set; }
 
         public DateTime CreatedOn { get; set; } 
     }

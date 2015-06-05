@@ -13,11 +13,9 @@ namespace Tweeter.Web
                         "~/Scripts/jquery-ui-1.11.4.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/infragistics").Include(
-                        "~/Scripts/infragistics.core.js",
-                        "~/Scripts/infragistics.dv.js",
-                        "~/Scripts/infragistics.lob.js",
-                        "~/Scripts/infragistics.loader.js"));
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+                        "~/Scripts/kendo.all.min.js",
+                        "~/Scripts/kendo.aspnetmvc.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -36,9 +34,10 @@ namespace Tweeter.Web
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/infragistics").Include(
-                      "~/Content/infragistics.css",
-                      "~/Content/infragistics.theme.css"));
+            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+                      "~/Content/kendo/kendo.common.core.min.css",
+                      "~/Content/kendo/kendo.common.min.css",
+                      "~/Content/kendo/kendo.bootstrap.min.css"));
         }
     }
 }

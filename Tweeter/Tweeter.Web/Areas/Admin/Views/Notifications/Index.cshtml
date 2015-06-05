@@ -1,0 +1,55 @@
+﻿@using Kendo.Mvc.UI
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Tweets Admin Panel</h2>
+@(Html.Kendo().Grid<Tweeter.Web.InputModels.NotificationInputModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(t => t.Id).Width(40).Title("Id");
+        columns.Bound(t => t.Text);
+        columns.Bound(t => t.Date).Width(150);
+        columns.Bound(t => t.IsChecked).Width(100);
+        columns.Bound(t => t.UserId).Width(150);
+        columns.Command(command =>
+        {
+            command.Edit();
+            command.Destroy();
+        }).Width(180);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Pageable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:630px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Events(events => events.Error("error_handler"))
+        .Model(model =>
+        {
+            model.Id(t => t.Id);
+            model.Field(t => t.Id).Editable(false);
+        })
+        .Create(update => update.Action("EditingInline_Create", "Notifications"))
+        .Read(read => read.Action("EditingInline_Read", "Notifications"))
+        .Update(update => update.Action("EditingInline_Update", "Notifications"))
+        .Destroy(update => update.Action("EditingInline_Destroy", "Notifications"))
+    )
+)
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

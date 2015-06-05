@@ -2,6 +2,7 @@
 {
     using System.Data.Entity;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Data.UnitOfWork;
@@ -88,6 +89,13 @@
         public UsersController(ITweeterData data)
             : base(data)
         {
+        }
+
+        public ActionResult Update(string ig_transactions)
+        {
+
+            throw new HttpException();
+            return null;
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 text-center alert alert-warning">
+        <h1>@Html.ActionLink("Tweets", "Index", "Tweets", new { area = "Admin" }, new { style = "color: black;" })</h1>
+    </div>
+    <div class="col-md-4 col-md-offset-4 text-center alert alert-warning">
+        <h1>@Html.ActionLink("Users", "Index", "Users", new { area = "Admin" }, new { style = "color: black;" })</h1>
+    </div>
+    <div class="col-md-4 col-md-offset-4 text-center alert alert-warning">
+        <h1>@Html.ActionLink("Notifications", "Index", "Notifications", new { area = "Admin" }, new { style = "color: black;" })</h1>
+    </div>
+</div>

@@ -83,18 +83,8 @@
       <HintPath>..\packages\Glimpse.SignalR.1.0.0\lib\net40\Glimpse.SignalR.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics.Olap.DataProvider.Adomd.Mvc, Version=5.15.1.1005, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Infragistics\2015.1\Ignite UI\MVC\MVC5\Bin\Infragistics.Olap.DataProvider.Adomd.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="Infragistics.Web.Mvc, Version=5.15.1.1005, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Infragistics\2015.1\Ignite UI\MVC\MVC5\Bin\Infragistics.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Infragistics.Web.Mvc.Mobile, Version=5.15.1.1005, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Infragistics\2015.1\Ignite UI\MVC\MVC5\Bin\Infragistics.Web.Mvc.Mobile.dll</HintPath>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2015\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -274,8 +264,12 @@
     <Compile Include="App_Start\ViewEnginesConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TweetsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="InputModels\NotificationInputModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -293,6 +287,8 @@
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mapping\IMapTo.cs" />
     <Compile Include="Infrastructure\Mapping\TypesMap.cs" />
+    <Compile Include="InputModels\TweetInputModel.cs" />
+    <Compile Include="InputModels\UserInputModel.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -310,79 +306,23 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\images\icon_sprite.png" />
-    <Content Include="Content\images\igBrowserLogos.png" />
-    <Content Include="Content\images\igGrid\blank.png" />
-    <Content Include="Content\images\igGrid\diagonals-medium.png" />
-    <Content Include="Content\images\igGrid\filter-icons-333333.png" />
-    <Content Include="Content\images\igGrid\filter-icons-FFFFFF.png" />
-    <Content Include="Content\images\igGrid\group-by-label-right-edge.png" />
-    <Content Include="Content\images\igGrid\touch-icons.png" />
-    <Content Include="Content\images\igGrid\touch-icons.svg" />
-    <Content Include="Content\images\igHtmlEditor\arrow_collapse.png" />
-    <Content Include="Content\images\igHtmlEditor\arrow_expand.png" />
-    <Content Include="Content\images\igHtmlEditor\arrow_redo.png" />
-    <Content Include="Content\images\igHtmlEditor\arrow_undo.png" />
-    <Content Include="Content\images\igHtmlEditor\background_color.png" />
-    <Content Include="Content\images\igHtmlEditor\check.png" />
-    <Content Include="Content\images\igHtmlEditor\cut.png" />
-    <Content Include="Content\images\igHtmlEditor\decrease-font-size.png" />
-    <Content Include="Content\images\igHtmlEditor\html-editor-sprite.png" />
-    <Content Include="Content\images\igHtmlEditor\html.png" />
-    <Content Include="Content\images\igHtmlEditor\html_add.png" />
-    <Content Include="Content\images\igHtmlEditor\html_delete.png" />
-    <Content Include="Content\images\igHtmlEditor\html_go.png" />
-    <Content Include="Content\images\igHtmlEditor\html_valid.png" />
-    <Content Include="Content\images\igHtmlEditor\image_add.png" />
-    <Content Include="Content\images\igHtmlEditor\increase-font-size.png" />
-    <Content Include="Content\images\igHtmlEditor\link.png" />
-    <Content Include="Content\images\igHtmlEditor\link_add.png" />
-    <Content Include="Content\images\igHtmlEditor\link_break.png" />
-    <Content Include="Content\images\igHtmlEditor\page_copy.png" />
-    <Content Include="Content\images\igHtmlEditor\page_paste.png" />
-    <Content Include="Content\images\igHtmlEditor\table-delete-column-icon.png" />
-    <Content Include="Content\images\igHtmlEditor\table-insert-column-icon.png" />
-    <Content Include="Content\images\igHtmlEditor\table.png" />
-    <Content Include="Content\images\igHtmlEditor\table_row_delete.png" />
-    <Content Include="Content\images\igHtmlEditor\table_row_insert.png" />
-    <Content Include="Content\images\igHtmlEditor\text_align_center.png" />
-    <Content Include="Content\images\igHtmlEditor\text_align_justify.png" />
-    <Content Include="Content\images\igHtmlEditor\text_align_left.png" />
-    <Content Include="Content\images\igHtmlEditor\text_align_right.png" />
-    <Content Include="Content\images\igHtmlEditor\text_bold.png" />
-    <Content Include="Content\images\igHtmlEditor\text_color.png" />
-    <Content Include="Content\images\igHtmlEditor\text_horizontalrule.png" />
-    <Content Include="Content\images\igHtmlEditor\text_indent.png" />
-    <Content Include="Content\images\igHtmlEditor\text_indent_remove.png" />
-    <Content Include="Content\images\igHtmlEditor\text_italic.png" />
-    <Content Include="Content\images\igHtmlEditor\text_list_bullets.png" />
-    <Content Include="Content\images\igHtmlEditor\text_list_numbers.png" />
-    <Content Include="Content\images\igHtmlEditor\text_strikethrough.png" />
-    <Content Include="Content\images\igHtmlEditor\text_underline.png" />
-    <Content Include="Content\images\igLoadingSmall.gif" />
-    <Content Include="Content\images\igPivot\dataselector-sprite.png" />
-    <Content Include="Content\images\igPivot\kpi-icons.png" />
-    <Content Include="Content\images\igPivot\pivot-header-icons.png" />
-    <Content Include="Content\images\igPopover\igPopoverArrowBottom.png" />
-    <Content Include="Content\images\igPopover\igPopoverArrowLeft.png" />
-    <Content Include="Content\images\igPopover\igPopoverArrowRight.png" />
-    <Content Include="Content\images\igPopover\igPopoverArrows.png" />
-    <Content Include="Content\images\igPopover\igPopoverArrowTop.png" />
-    <Content Include="Content\images\igRating\ig-rating-touch.png" />
-    <Content Include="Content\images\igRating\ig-rating-touchx2.png" />
-    <Content Include="Content\images\igVideoPlayer\igBigPauseButton.png" />
-    <Content Include="Content\images\igVideoPlayer\igBigPlayButton.png" />
-    <Content Include="Content\images\igVideoPlayer\igLoadingSmall.gif" />
-    <Content Include="Content\images\igVideoPlayer\igPlayButton24.png" />
-    <Content Include="Content\images\igVideoPlayer\igPlayButton32.png" />
-    <Content Include="Content\images\igVideoPlayer\igPlayButton48.png" />
-    <Content Include="Content\images\igVideoPlayer\igVPBackground.png" />
-    <Content Include="Content\images\igVideoPlayer\igVPBookmarkSprite.png" />
-    <Content Include="Content\images\igVideoPlayer\igWarningIcon.png" />
-    <Content Include="Content\images\trial.png" />
-    <Content Include="Content\images\ui-anim_basic_16x16.gif" />
-    <Content Include="Content\infragistics.css" />
-    <Content Include="Content\infragistics.theme.css" />
+    <Content Include="Content\kendo\Bootstrap\editor.png" />
+    <Content Include="Content\kendo\Bootstrap\imagebrowser.png" />
+    <Content Include="Content\kendo\Bootstrap\indeterminate.gif" />
+    <Content Include="Content\kendo\Bootstrap\loading-image.gif" />
+    <Content Include="Content\kendo\Bootstrap\loading.gif" />
+    <Content Include="Content\kendo\Bootstrap\loading_2x.gif" />
+    <Content Include="Content\kendo\Bootstrap\markers.png" />
+    <Content Include="Content\kendo\Bootstrap\markers_2x.png" />
+    <Content Include="Content\kendo\Bootstrap\slider-h.gif" />
+    <Content Include="Content\kendo\Bootstrap\slider-v.gif" />
+    <Content Include="Content\kendo\Bootstrap\sprite.png" />
+    <Content Include="Content\kendo\Bootstrap\sprite_2x.png" />
+    <Content Include="Content\kendo\Bootstrap\sprite_kpi.png" />
+    <Content Include="Content\kendo\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\kendo.bootstrap.min.css" />
+    <Content Include="Content\kendo\kendo.common.core.min.css" />
+    <Content Include="Content\kendo\kendo.common.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -435,11 +375,13 @@
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tweets\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Notifications\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\AuthorEditor.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\infragistics.core.js" />
-    <Content Include="Scripts\infragistics.dv.js" />
-    <Content Include="Scripts\infragistics.loader.js" />
-    <Content Include="Scripts\infragistics.lob.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -457,6 +399,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\kendo.all.min.js" />
+    <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
@@ -464,7 +408,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -526,7 +472,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
