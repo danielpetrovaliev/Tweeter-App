@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{A63D29DF-D51E-485D-BD9C-8DB0973EDB4A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Libraries", "External Libraries", "{84240FB5-DD76-4878-9E77-1AED438F2FE4}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2015\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll = ..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2015\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweeter.Data", "Tweeter.Data\Tweeter.Data.csproj", "{96A9E99F-3BD6-49CB-A38C-4D9C0E9BC7EC}"
 EndProject
