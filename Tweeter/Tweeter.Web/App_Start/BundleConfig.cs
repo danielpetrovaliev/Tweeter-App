@@ -34,7 +34,7 @@ namespace Tweeter.Web
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+            bundles.Add(new StyleBundle("~/Content/kendo/kendostyles").Include(
                       "~/Content/kendo/kendo.common.core.min.css",
                       "~/Content/kendo/kendo.common.min.css",
                       "~/Content/kendo/kendo.bootstrap.min.css"));
