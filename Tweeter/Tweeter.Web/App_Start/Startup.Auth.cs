@@ -9,7 +9,7 @@ using Owin;
 namespace Tweeter.Web
 {
     using Data;
-    using Tweeter.Models;
+    using Models;
 
     public partial class Startup
     {

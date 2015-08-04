@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -468,7 +469,10 @@
     <Content Include="Views\Shared\Tweet\_CreateTweetPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TweetViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NotificationViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SimpleUserViewModel.cshtml" />
+    <Content Include="Views\Shared\_SearchUserPartial.cshtml" />
     <None Include="Views\Tweets\GetPartialTweet.cshtml" />
+    <Content Include="Views\Users\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

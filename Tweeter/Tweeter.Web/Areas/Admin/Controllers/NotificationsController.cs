@@ -48,14 +48,14 @@
                 .Project()
                 .To<NotificationInputModel>();
 
-            return Json(tweets.ToDataSourceResult(request));
+            return this.Json(tweets.ToDataSourceResult(request));
         }
 
         [HttpPost]
         public ActionResult EditingInline_Create([DataSourceRequest] DataSourceRequest request,
             NotificationInputModel notificationModel)
         {
-            if (notificationModel != null && ModelState.IsValid)
+            if (notificationModel != null && this.ModelState.IsValid)
             {
                 var notification = Mapper.Map<Notification>(notificationModel);
 
@@ -63,28 +63,28 @@
                 this.Data.SaveChanges();
             }
 
-            return Json(new[] { notificationModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { notificationModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         [HttpPost]
         public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request,
             NotificationInputModel notificationModel)
         {
-            if (notificationModel != null && ModelState.IsValid)
+            if (notificationModel != null && this.ModelState.IsValid)
             {
                 var notification = Mapper.Map<Notification>(notificationModel);
                 this.Data.Notifications.Update(notification);
                 this.Data.SaveChanges();
             }
 
-            return Json(new[] { notificationModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { notificationModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         [HttpPost]
         public ActionResult EditingInline_Destroy([DataSourceRequest] DataSourceRequest request,
             TweetInputModel tweetModel)
         {
-            if (tweetModel != null && ModelState.IsValid)
+            if (tweetModel != null && this.ModelState.IsValid)
             {
                 var tweet = this.Data
                     .Tweets
@@ -95,7 +95,7 @@
                 this.Data.SaveChanges();
             }
 
-            return Json(new[] { tweetModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { tweetModel }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

@@ -49,7 +49,7 @@
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            return View(tweets.ToPagedList(pageNumber, pageSize));
+            return this.View(tweets.ToPagedList(pageNumber, pageSize));
         }
 
         public HomeController(ITweeterData data)

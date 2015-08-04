@@ -5,9 +5,44 @@
     Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
 }
 
+<div class="row">
+    <div class="col-md-6">
+        <h1>@Model.FullName</h1>
+    </div>
+    @if (!(bool)this.ViewBag.isIFollow)
+    {
+        <div class="col-md-6">
+            @Html.ActionLink("Follow me", "Follow", "Users", new { userId = Model.Id }, new { @class = "btn btn-lg btn-info" })
+        </div>
+    }
+</div>
+<div style="margin-bottom: 30px" class="row">
+    <div class="col-md-6">
+        <h4 style="margin-bottom: 5px">Followers:</h4>
+        @foreach (var follower in Model.Followers)
+        {
+            <div>
+                <b> @follower.FullName - @follower.Email</b>
+            </div>
+        }
+    </div>
+    <div class="col-md-6">
+        <h4 style="margin-bottom: 5px">Followings:</h4>
+        @foreach (var follower in Model.Followings)
+        {
+            <div>
+                <b> @follower.FullName - @follower.Email</b>
+            </div>
+        }
+    </div>
+</div>
+
+<h3>Tweets: </h3>
 @if (Model.Tweets.Any())
 {
-    @Html.DisplayFor(u => u.Tweets);
+    <div>
+        @Html.DisplayFor(u => u.Tweets)
+    </div>
 }
 else
 {

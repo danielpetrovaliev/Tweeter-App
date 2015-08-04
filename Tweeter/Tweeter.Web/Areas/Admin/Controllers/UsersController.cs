@@ -36,13 +36,13 @@
                 .Project()
                 .To<UserInputModel>();
 
-            return Json(users.ToDataSourceResult(request));
+            return this.Json(users.ToDataSourceResult(request));
         }
 
         [HttpPost]
         public ActionResult EditingInline_Create([DataSourceRequest] DataSourceRequest request, UserInputModel userModel)
         {
-            if (userModel != null && ModelState.IsValid)
+            if (userModel != null && this.ModelState.IsValid)
             {
                 // I create instace of new user because with automapper EF throws exception for validation errors   
                 var user = new User
@@ -72,7 +72,7 @@
                 }
 
                 // Set role
-                AddOrRemoveAdministratorRoleForUser(user.Id, userModel.IsAdmin);
+                this.AddOrRemoveAdministratorRoleForUser(user.Id, userModel.IsAdmin);
 
                 this.Data.SaveChanges();
 
@@ -81,7 +81,7 @@
                 userModel.Id = user.Id;
             }
 
-            return Json(new[] { userModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { userModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         private void AddOrRemoveAdministratorRoleForUser(string id, bool isAdmin)
@@ -110,7 +110,7 @@
         [HttpPost]
         public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request, UserInputModel userModel)
         {
-            if (userModel != null && ModelState.IsValid)
+            if (userModel != null && this.ModelState.IsValid)
             {
                 var userManager = this.HttpContext.GetOwinContext().
                     GetUserManager<ApplicationUserManager>();
@@ -131,7 +131,7 @@
                     this.Data.SaveChanges();
 
                     // Set role
-                    AddOrRemoveAdministratorRoleForUser(userModel.Id, userModel.IsAdmin);
+                    this.AddOrRemoveAdministratorRoleForUser(userModel.Id, userModel.IsAdmin);
 
                     // Set new password to input model
                     userModel.PasswordHash = userDb.PasswordHash;
@@ -142,7 +142,7 @@
                 }
             }
 
-            return Json(new[] { userModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { userModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         [HttpPost]
@@ -155,7 +155,7 @@
                 this.Data.SaveChanges();
             }
 
-            return Json(new[] { userModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { userModel }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

@@ -6,6 +6,8 @@
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Data.UnitOfWork;
+    using Microsoft.AspNet.Identity;
+    using PagedList;
     using ViewModels.Notification;
     using ViewModels.User;
     using WebGrease.Css.Extensions;
@@ -29,6 +31,8 @@
                 .To<UserViewModel>()
                 .FirstOrDefault(u => u.Id == this.UserProfile.Id);
 
+            this.ViewBag.isIFollow = true;
+
             if (id != null)
             {
                 user = this.Data
@@ -50,10 +54,16 @@
                     return this.HttpNotFound();
                 }
 
-                return View(user);
+                this.ViewBag.isIFollow = user.Followers.Any(u => u.Id == this.UserProfile.Id);
+                if (this.UserProfile.Id == id)
+                {
+                    this.ViewBag.isIFollow = true;
+                }
+
+                return this.View(user);
             }
 
-            return View(user);
+            return this.View(user);
         }
 
         [HttpGet]
@@ -83,7 +93,7 @@
                 .ForEach(n => n.IsChecked = true);
             this.Data.SaveChanges();
 
-            return View(notifications);
+            return this.View(notifications);
         }
 
         public UsersController(ITweeterData data)
@@ -96,6 +106,41 @@
 
             throw new HttpException();
             return null;
+        }
+
+        [HttpGet]
+        public ActionResult Search(string query, int? page)
+        {
+            var users = this.Data
+                .Users
+                .All()
+                .Where(u => u.UserName.Contains(query) || u.Email.Contains(query))
+                .OrderBy(u => u.UserName)
+                .Project()
+                .To<SimpleUserViewModel>();
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return this.View(users.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult Follow(string userId)
+        {
+            var user = this.Data
+                .Users
+                .All()
+                .FirstOrDefault(u => u.Id == userId);
+
+            var currUser = this.Data
+                .Users
+                .All()
+                .FirstOrDefault(u => u.Id == this.UserProfile.Id);
+
+            user.Followers.Add(currUser);
+            currUser.Followings.Add(user);
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("ShowProfile", new {id = userId});
         }
     }
 }

@@ -21,8 +21,8 @@
         // GET: Tweets
         public ActionResult Index()
         {
-            var tweets = db.Tweets.Include(t => t.Author);
-            return View(tweets.ToList());
+            var tweets = this.db.Tweets.Include(t => t.Author);
+            return this.View(tweets.ToList());
         }
 
         // GET: Tweets/Details/5
@@ -42,10 +42,10 @@
 
             if (tweet == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(tweet);
+            return this.View(tweet);
         }
 
         [HttpPost]
@@ -68,7 +68,7 @@
             });
             this.Data.SaveChanges();
 
-            IncreaseNotifications(tweet.Author);
+            this.IncreaseNotifications(tweet.Author);
 
             return this.Content(tweet.UsersFavorites.Count + "");
         }
@@ -98,7 +98,7 @@
             });
             this.Data.SaveChanges();
 
-            IncreaseNotifications(tweet.Author);
+            this.IncreaseNotifications(tweet.Author);
 
             return this.Content(tweet.Reports.Count + "");
         }
@@ -128,17 +128,17 @@
 
             if (tweet == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(tweet);
+            return this.View(tweet);
         }
 
         // GET: Tweets/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName");
-            return View();
+            this.ViewBag.AuthorId = new SelectList(this.db.Users, "Id", "FullName");
+            return this.View();
         }
 
         // POST: Tweets/Create
@@ -153,8 +153,8 @@
                 tweet.AuthorId = this.User.Identity.GetUserId();
 
                 var newTweet = new Tweet() {AuthorId = tweet.AuthorId, Text = tweet.Text};
-                db.Tweets.Add(newTweet);
-                db.SaveChanges();
+                this.db.Tweets.Add(newTweet);
+                this.db.SaveChanges();
                 
                 // Show Tweet to all followers
                 var context = GlobalHost.ConnectionManager.GetHubContext<TweeterHub>();
@@ -165,14 +165,14 @@
                 this.TempData["message"] = "Tweet added successfully.";
                 this.TempData["isMessageSuccess"] = true;
 
-                return RedirectToAction("Index", "Home");
+                return this.RedirectToAction("Index", "Home");
             }
 
             this.TempData["message"] = "There are problem with tweet adding.";
             this.TempData["isMessageSuccess"] = false;
 
-            this.ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);
-            return View("Tweet/_CreateTweetPartial", tweet);
+            this.ViewBag.AuthorId = new SelectList(this.db.Users, "Id", "FullName", tweet.AuthorId);
+            return this.View("Tweet/_CreateTweetPartial", tweet);
         }
 
         // GET: Tweets/Edit/5
@@ -182,13 +182,13 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tweet tweet = db.Tweets.Find(id);
+            Tweet tweet = this.db.Tweets.Find(id);
             if (tweet == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);
-            return View(tweet);
+            this.ViewBag.AuthorId = new SelectList(this.db.Users, "Id", "FullName", tweet.AuthorId);
+            return this.View(tweet);
         }
 
         // POST: Tweets/Edit/5
@@ -198,15 +198,15 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,AuthorId,Text,CreatedOn")] Tweet tweet)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                db.Entry(tweet).State = EntityState.Modified;
-                db.SaveChanges();
+                this.db.Entry(tweet).State = EntityState.Modified;
+                this.db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FullName", tweet.AuthorId);
-            return View(tweet);
+            this.ViewBag.AuthorId = new SelectList(this.db.Users, "Id", "FullName", tweet.AuthorId);
+            return this.View(tweet);
         }
 
         // GET: Tweets/Delete/5
@@ -216,12 +216,12 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tweet tweet = db.Tweets.Find(id);
+            Tweet tweet = this.db.Tweets.Find(id);
             if (tweet == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(tweet);
+            return this.View(tweet);
         }
 
         // POST: Tweets/Delete/5
@@ -229,17 +229,17 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tweet tweet = db.Tweets.Find(id);
-            db.Tweets.Remove(tweet);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Tweet tweet = this.db.Tweets.Find(id);
+            this.db.Tweets.Remove(tweet);
+            this.db.SaveChanges();
+            return this.RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                this.db.Dispose();
             }
             base.Dispose(disposing);
         }

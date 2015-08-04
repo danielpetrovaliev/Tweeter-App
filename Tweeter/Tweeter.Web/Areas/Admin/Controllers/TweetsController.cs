@@ -43,14 +43,14 @@
                 .Project()
                 .To<TweetInputModel>();
 
-            return Json(tweets.ToDataSourceResult(request));
+            return this.Json(tweets.ToDataSourceResult(request));
         }
 
         [HttpPost]
         public ActionResult EditingInline_Create([DataSourceRequest] DataSourceRequest request, 
             TweetInputModel tweetModel)
         {
-            if (tweetModel != null && ModelState.IsValid)
+            if (tweetModel != null && this.ModelState.IsValid)
             {
                 var tweet = Mapper.Map<Tweet>(tweetModel);
 
@@ -58,14 +58,14 @@
                 this.Data.SaveChanges();
             }
 
-            return Json(new[] { tweetModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { tweetModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         [HttpPost]
         public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request,
             TweetInputModel tweetModel)
         {
-            if (tweetModel != null && ModelState.IsValid)
+            if (tweetModel != null && this.ModelState.IsValid)
             {
                 var tweet = this.Data
                     .Tweets
@@ -79,14 +79,14 @@
                 this.Data.SaveChanges();
             }
 
-            return Json(new[] { tweetModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { tweetModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         [HttpPost]
         public ActionResult EditingInline_Destroy([DataSourceRequest] DataSourceRequest request, 
             TweetInputModel tweetModel)
         {
-            if (tweetModel != null && ModelState.IsValid)
+            if (tweetModel != null && this.ModelState.IsValid)
             {
                 var tweet = this.Data
                     .Tweets
@@ -97,7 +97,7 @@
                 this.Data.SaveChanges();
             }
 
-            return Json(new[] { tweetModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { tweetModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         public TweetsController(ITweeterData data)
