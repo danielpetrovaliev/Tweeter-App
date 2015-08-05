@@ -8,7 +8,6 @@
     using InputModels;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-    using Models;
     using ViewModels.User;
     using Notification = Models.Notification;
 
@@ -33,7 +32,7 @@
                 .Select(u => new SimpleUserViewModel
                 {
                     Id = u.Id,
-                    UserName = u.UserName,
+                    UserName = u.UserName
                 });
 
             return this.Json(notifications, JsonRequestBehavior.AllowGet);

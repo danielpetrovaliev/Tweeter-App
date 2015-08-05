@@ -62,7 +62,7 @@
                     RequireNonLetterOrDigit = false,
                     RequireDigit = false,
                     RequireLowercase = false,
-                    RequireUppercase = false,
+                    RequireUppercase = false
                 };
 
                 var userCreateResult = userManager.Create(user, user.PasswordHash);

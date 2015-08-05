@@ -8,7 +8,7 @@
     public class TweeterDbContext : IdentityDbContext<User>, ITweeterDbContext
     {
         public TweeterDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", false)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TweeterDbContext, Configuration>());
         }

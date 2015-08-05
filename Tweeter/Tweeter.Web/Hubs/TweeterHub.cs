@@ -1,12 +1,10 @@
 ﻿namespace Tweeter.Web.Hubs
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Data;
     using Data.UnitOfWork;
     using Microsoft.AspNet.SignalR;
     using Microsoft.AspNet.SignalR.Hubs;
-    using Models;
 
     [Authorize]
     [HubName("tweeterHub")]

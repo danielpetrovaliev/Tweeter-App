@@ -1,5 +1,5 @@
-﻿@model PagedList.IPagedList<Tweeter.Web.ViewModels.Tweet.TweetViewModel>
-@using PagedList.Mvc;
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Tweeter.Web.ViewModels.Tweet.TweetViewModel>
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
@@ -7,7 +7,7 @@
 
 @if (TempData["message"] != null)
 {
-    if (((bool)TempData["isMessageSuccess"]) == true)
+    if (((bool)TempData["isMessageSuccess"]))
     {
         <div class="alert alert-success">
             @TempData["message"]
@@ -21,7 +21,7 @@
     }
 }
 
-@if (this.User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated)
 {
     Html.RenderPartial("Tweet/_CreateTweetPartial");
 }

@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace Tweeter.Web.Areas.Admin
+﻿namespace Tweeter.Web.Areas.Admin
 {
+    using System.Web.Mvc;
+
     public class AdminAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
@@ -17,8 +17,7 @@ namespace Tweeter.Web.Areas.Admin
             context.MapRoute(   
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "Tweeter.Web.Areas.Admin.Controllers" }
+                new { action = "Index", id = UrlParameter.Optional }, new[] { "Tweeter.Web.Areas.Admin.Controllers" }
             );
         }
     }

@@ -62,7 +62,7 @@
             tweet.UsersFavorites.Add(this.UserProfile);
             this.Data.SaveChanges();
 
-            tweet.Author.Notifications.Add(new Notification()
+            tweet.Author.Notifications.Add(new Notification
             {
                 Text = this.UserProfile.UserName + " likes you tweet - " + tweet.Id
             });
@@ -83,7 +83,7 @@
                 .Include(t => t.Author.Notifications)
                 .FirstOrDefault(t => t.Id == id);
             
-            var report = new Report()
+            var report = new Report
             {
                 Text = "New Report - TODO: add form for Report !",
                 TweetId = id,
@@ -92,7 +92,7 @@
             tweet.Reports.Add(report);
             this.Data.SaveChanges();
 
-            tweet.Author.Notifications.Add(new Notification()
+            tweet.Author.Notifications.Add(new Notification
             {
                 Text = this.UserProfile.UserName + " added report with text - " + report.Text
             });
@@ -152,7 +152,7 @@
             {
                 tweet.AuthorId = this.User.Identity.GetUserId();
 
-                var newTweet = new Tweet() {AuthorId = tweet.AuthorId, Text = tweet.Text};
+                var newTweet = new Tweet {AuthorId = tweet.AuthorId, Text = tweet.Text};
                 this.db.Tweets.Add(newTweet);
                 this.db.SaveChanges();
                 

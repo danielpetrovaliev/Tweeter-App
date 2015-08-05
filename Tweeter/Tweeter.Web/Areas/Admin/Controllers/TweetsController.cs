@@ -28,7 +28,7 @@
                 .Select(u => new SimpleUserViewModel
                 {
                     Id = u.Id,
-                    UserName = u.UserName,
+                    UserName = u.UserName
                 });
 
             return this.Json(authors, JsonRequestBehavior.AllowGet);

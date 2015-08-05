@@ -13,7 +13,7 @@
         @Model.Text
     </div>
     <div>
-        @if (this.User.Identity.IsAuthenticated)
+        @if (User.Identity.IsAuthenticated)
         {
             <div style="margin-top: 15px;" class="row">
                 <div class="col-md-2">
@@ -22,11 +22,11 @@
                 </div>
                 <div class="col-md-2">
 
-                    @Ajax.RawAjaxActionLink(String.Format("<i class='glyphicon glyphicon-star'></i>"), 
+                    @Ajax.RawAjaxActionLink("<i class=\'glyphicon glyphicon-star\'></i>", 
                         "FavoriteTweet", 
                         "Tweets", 
                         new { id = Model.Id },
-                        new AjaxOptions()
+                        new AjaxOptions
                         {
                             HttpMethod = "POST",
                             UpdateTargetId = "tweet-favorites-" + Model.Id,
@@ -37,11 +37,11 @@
                 </div>
                 <div class="col-md-2">
 
-                    @Ajax.RawAjaxActionLink(String.Format("<i class='glyphicon glyphicon-warning-sign'></i>"), 
+                    @Ajax.RawAjaxActionLink("<i class=\'glyphicon glyphicon-warning-sign\'></i>", 
                         "ReportTweet", 
                         "Tweets", 
                         new { id = Model.Id },
-                        new AjaxOptions() 
+                        new AjaxOptions
                         {
                             HttpMethod = "POST",
                             UpdateTargetId = "tweet-reports-" + Model.Id,

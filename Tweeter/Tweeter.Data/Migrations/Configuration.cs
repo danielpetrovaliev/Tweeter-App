@@ -3,7 +3,6 @@ namespace Tweeter.Data.Migrations
     using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
-    using System.Data.Entity.Validation;
     using System.Linq;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -32,7 +31,7 @@ namespace Tweeter.Data.Migrations
 
         private void AddAdministratorRoleWithUser(TweeterDbContext context)
         {
-            var admin = new User()
+            var admin = new User
             {
                 Email = "admin@admin.com",
                 FullName = "Admin Adminov",
@@ -47,7 +46,7 @@ namespace Tweeter.Data.Migrations
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,
-                RequireUppercase = false,
+                RequireUppercase = false
             };
 
             var password = admin.UserName;
@@ -76,14 +75,14 @@ namespace Tweeter.Data.Migrations
 
         private static void AddUsers(TweeterDbContext context)
         {
-            var gosho = new User()
+            var gosho = new User
             {
                 Email = "gosho@gosho.com",
                 FullName = "Gosho Goshev",
                 UserName = "gosho"
             };
 
-            var pesho = new User()
+            var pesho = new User
             {
                 Email = "pesho@pesho.com",
                 FullName = "Pesho Peshev",
@@ -91,7 +90,7 @@ namespace Tweeter.Data.Migrations
             };
 
 
-            var users = new List<User>()
+            var users = new List<User>
             {
                 pesho,
                 gosho
@@ -105,7 +104,7 @@ namespace Tweeter.Data.Migrations
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,
-                RequireUppercase = false,
+                RequireUppercase = false
             };
 
             foreach (var user in users)

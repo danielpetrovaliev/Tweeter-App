@@ -1,4 +1,4 @@
-﻿@if (this.User.Identity.IsAuthenticated)
+﻿@if (User.Identity.IsAuthenticated)
 {
     <div class="col-sm-3 col-md-3">
         @using (Html.BeginForm("Search", "Users", FormMethod.Get, new { @class = "navbar-form", role = "search" }))

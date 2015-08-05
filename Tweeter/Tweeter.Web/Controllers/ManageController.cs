@@ -1,14 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-
-namespace Tweeter.Web.Controllers
+﻿namespace Tweeter.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
     using ViewModels;
 
     [Authorize]
@@ -89,7 +87,7 @@ namespace Tweeter.Web.Controllers
                 var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await this.SignInManager.SignInAsync(user, false, false);
                 }
                 message = ManageMessageId.RemoveLoginSuccess;
             }
@@ -141,7 +139,7 @@ namespace Tweeter.Web.Controllers
             var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
             if (user != null)
             {
-                await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                await this.SignInManager.SignInAsync(user, false, false);
             }
             return this.RedirectToAction("Index", "Manage");
         }
@@ -156,7 +154,7 @@ namespace Tweeter.Web.Controllers
             var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
             if (user != null)
             {
-                await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                await this.SignInManager.SignInAsync(user, false, false);
             }
             return this.RedirectToAction("Index", "Manage");
         }
@@ -186,7 +184,7 @@ namespace Tweeter.Web.Controllers
                 var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await this.SignInManager.SignInAsync(user, false, false);
                 }
                 return this.RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
@@ -207,7 +205,7 @@ namespace Tweeter.Web.Controllers
             var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
             if (user != null)
             {
-                await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                await this.SignInManager.SignInAsync(user, false, false);
             }
             return this.RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
@@ -235,7 +233,7 @@ namespace Tweeter.Web.Controllers
                 var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await this.SignInManager.SignInAsync(user, false, false);
                 }
                 return this.RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
@@ -264,7 +262,7 @@ namespace Tweeter.Web.Controllers
                     var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
                     if (user != null)
                     {
-                        await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await this.SignInManager.SignInAsync(user, false, false);
                     }
                     return this.RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
                 }

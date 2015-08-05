@@ -1,9 +1,10 @@
 ﻿@using Kendo.Mvc.UI
+@using Tweeter.Web.InputModels
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <h2>Tweets Admin Panel</h2>
-@(Html.Kendo().Grid<Tweeter.Web.InputModels.NotificationInputModel>()
+@(Html.Kendo().Grid<NotificationInputModel>()
     .Name("grid")
     .Columns(columns =>
     {

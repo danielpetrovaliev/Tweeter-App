@@ -6,7 +6,6 @@
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Data.UnitOfWork;
-    using Microsoft.AspNet.Identity;
     using PagedList;
     using ViewModels.Notification;
     using ViewModels.User;

@@ -1,5 +1,4 @@
-﻿@using System.Linq
-@model Tweeter.Web.ViewModels.User.UserViewModel
+﻿@model Tweeter.Web.ViewModels.User.UserViewModel
 @{
     ViewBag.Title = "User page";
     Layout = "~/Views/Shared/_DefaultTweetsLayout.cshtml";
@@ -9,7 +8,7 @@
     <div class="col-md-6">
         <h1>@Model.FullName</h1>
     </div>
-    @if (!(bool)this.ViewBag.isIFollow)
+    @if (!(bool)ViewBag.isIFollow)
     {
         <div class="col-md-6">
             @Html.ActionLink("Follow me", "Follow", "Users", new { userId = Model.Id }, new { @class = "btn btn-lg btn-info" })

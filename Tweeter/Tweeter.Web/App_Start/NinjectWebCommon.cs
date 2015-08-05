@@ -1,5 +1,8 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Tweeter.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Tweeter.Web.App_Start.NinjectWebCommon), "Stop")]
+using Tweeter.Web.App_Start;
+using WebActivatorEx;
+
+[assembly: PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace Tweeter.Web.App_Start
 {
@@ -8,7 +11,6 @@ namespace Tweeter.Web.App_Start
     using Data;
     using Data.UnitOfWork;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using Ninject;
     using Ninject.Web.Common;
 

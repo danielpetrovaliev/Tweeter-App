@@ -3,7 +3,6 @@
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
     using Data;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -55,7 +54,7 @@
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,
-                RequireUppercase = false,
+                RequireUppercase = false
             };
 
             // Configure user lockout defaults
