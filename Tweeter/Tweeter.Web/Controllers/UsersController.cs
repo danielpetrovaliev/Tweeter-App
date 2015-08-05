@@ -21,12 +21,8 @@
                 .Users
                 .All()
                 .Include(u => u.Followings)
+                .Include(u => u.Followers)
                 .Include(u => u.Tweets)
-                .Include("Tweets")
-                .Include("Tweets.Replays")
-                .Include("Tweets.UsersFavorites")
-                .Include("Tweets.UsersReTweets")
-                .Include("Tweets.Reports")
                 .Project()
                 .To<UserViewModel>()
                 .FirstOrDefault(u => u.Id == this.UserProfile.Id);
@@ -39,12 +35,8 @@
                     .Users
                     .All()
                     .Include(u => u.Followings)
+                    .Include(u => u.Followers)
                     .Include(u => u.Tweets)
-                    .Include("Tweets")
-                    .Include("Tweets.Replays")
-                    .Include("Tweets.UsersFavorites")
-                    .Include("Tweets.UsersReTweets")
-                    .Include("Tweets.Reports")
                     .Project()
                     .To<UserViewModel>()
                     .FirstOrDefault(u => u.Id == id);
